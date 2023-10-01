@@ -1,2 +1,5 @@
+from datetime import datetime
+
+
 def healthcheck():
-    return "Hellow world"
+    return str(datetime.now()).split('.')[0] + " Service is live"
