@@ -1,6 +1,7 @@
-from flask import Flask, request, render_template
+from flask import Flask
 
 from models.category import Category
+from models.record import Record
 from models.user import User
 
 app = Flask(__name__)
@@ -10,35 +11,29 @@ categorys = {}
 records = {}
 
 
-# @app.route('/user', methods=['POST', 'GET'])
-# def create_user():
-#     if request.method == 'POST':
-#         user = User(request.form["user_name"])
-#         users[user.ID] = user
-#         print("+ " + user.ID)
-#         return "You created the user :" + str(user)
-#     else:
-#         return render_template("login_user.html")
-
-
 @app.post('/user')
 def create_user():
-    user = User(request.get_json())
+    user = User("sayner")
     users[user.ID] = user
-    print("+ " + user.ID)
     return "You created the user :" + str(user)
 
 
 @app.get('/user/<userID>')
 def get_user(userID):
-    return users[userID].name
+    try:
+        return str(users[userID])
+    except:
+       return "This user isn't exist."
 
 
 @app.delete('/user/<userID>')
 def delete_user(userID):
-    del users[userID]
-    print("- " + userID)
-    return "You delete the user :" + str(users[userID])
+    try:
+        result = "You delete the user :" + str(users[userID])
+        del users[userID]
+        return result
+    except:
+       return "This user isn't exist."
 
 
 @app.get('/users')
@@ -46,34 +41,41 @@ def get_users():
     return str(users.keys())
 
 
-# @app.route('/category', methods=['POST', 'GET'])
-# def create_category():
-#     if request.method == 'POST':
-#         category = Category(request.form["category_name"])
-#         categorys[category.ID] = category
-#         print("+ " + category.ID)
-#         return "You created the category :" + str(category)
-#     else:
-#         return render_template("login_category.html")
+@app.post('/category')
+def create_category():
+    category = Category("category_name")
+    categorys[category.ID] = category
+    print("+ " + category.ID)
+    return "You created the category :" + str(category)
 
 
-# @app.delete('/category')
-# def endpoint():
-#     pass
-#
-#
-# @app.get('/category')
-# def endpoint():
-#     pass
-#
-#
+@app.get('/category/<categoryID>')
+def get_category(categoryID):
+    try:
+        return str(categorys[categoryID])
+    except:
+       return "This category isn't exist."
 
-@app.route('/record', methods=['POST', 'GET'])
+
+@app.get('/categorys')
+def get_categorys():
+    return str(categorys.keys())
+
+
+@app.delete('/category/<categoryID>')
+def delete_category(categoryID):
+    try:
+        result = "You delete the user :" + str(categorys[categoryID])
+        del categorys[categoryID]
+        return result
+    except:
+       return "This category isn't exist."
+
+
+@app.post('/record')
 def create_record():
-    if request.method == 'POST':
-        records
-    else:
-        return render_template("login_record.html")
+    record = Record(userID, categoryID)
+    records[record.ID] = record
 
 #
 # @app.delete('/record/<record_id>')
