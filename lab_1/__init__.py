@@ -1,7 +1,5 @@
 from flask import Flask
 from .views import healthcheck
-# import views
-
 
 app = Flask(__name__)
 
