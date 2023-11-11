@@ -24,15 +24,11 @@
 							}
 						},
 						"url": {
-							"raw": "http://127.0.0.1:5000/user",
-							"protocol": "http",
+							"raw": "{{PROTOCOL}}://{{DST_HOST}}/user",
+							"protocol": "{{PROTOCOL}}",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"{{DST_HOST}}"
 							],
-							"port": "5000",
 							"path": [
 								"user"
 							]
@@ -104,15 +100,11 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://127.0.0.1:5000/user?userID={{userID}}",
-							"protocol": "http",
+							"raw": "{{PROTOCOL}}://{{DST_HOST}}/user?userID={{userID}}",
+							"protocol": "{{PROTOCOL}}",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"{{DST_HOST}}"
 							],
-							"port": "5000",
 							"path": [
 								"user"
 							],
@@ -132,15 +124,11 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://127.0.0.1:5000/users",
-							"protocol": "http",
+							"raw": "{{PROTOCOL}}://{{DST_HOST}}/users",
+							"protocol": "{{PROTOCOL}}",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"{{DST_HOST}}"
 							],
-							"port": "5000",
 							"path": [
 								"users"
 							]
@@ -154,15 +142,11 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://127.0.0.1:5000/user?userID={{userID}}",
-							"protocol": "http",
+							"raw": "{{PROTOCOL}}://{{DST_HOST}}/user?userID={{userID}}",
+							"protocol": "{{PROTOCOL}}",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"{{DST_HOST}}"
 							],
-							"port": "5000",
 							"path": [
 								"user"
 							],
@@ -196,15 +180,11 @@
 							}
 						},
 						"url": {
-							"raw": "http://127.0.0.1:5000/category",
-							"protocol": "http",
+							"raw": "{{PROTOCOL}}://{{DST_HOST}}/category",
+							"protocol": "{{PROTOCOL}}",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"{{DST_HOST}}"
 							],
-							"port": "5000",
 							"path": [
 								"category"
 							]
@@ -276,15 +256,11 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://127.0.0.1:5000/category?categoryID={{categoryID}}",
-							"protocol": "http",
+							"raw": "{{PROTOCOL}}://{{DST_HOST}}/category?categoryID={{categoryID}}",
+							"protocol": "{{PROTOCOL}}",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"{{DST_HOST}}"
 							],
-							"port": "5000",
 							"path": [
 								"category"
 							],
@@ -304,15 +280,11 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://127.0.0.1:5000/categorys",
-							"protocol": "http",
+							"raw": "{{PROTOCOL}}://{{DST_HOST}}/categorys",
+							"protocol": "{{PROTOCOL}}",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"{{DST_HOST}}"
 							],
-							"port": "5000",
 							"path": [
 								"categorys"
 							]
@@ -326,15 +298,11 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://127.0.0.1:5000/category?categoryID={{categoryID}}",
-							"protocol": "http",
+							"raw": "{{PROTOCOL}}://{{DST_HOST}}/category?categoryID={{categoryID}}",
+							"protocol": "{{PROTOCOL}}",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"{{DST_HOST}}"
 							],
-							"port": "5000",
 							"path": [
 								"category"
 							],
@@ -359,15 +327,11 @@
 						"method": "POST",
 						"header": [],
 						"url": {
-							"raw": "http://127.0.0.1:5000/record?userID={{userID}}&categoryID={{categoryID}}",
-							"protocol": "http",
+							"raw": "{{PROTOCOL}}://{{DST_HOST}}/record?userID={{userID}}&categoryID={{categoryID}}",
+							"protocol": "{{PROTOCOL}}",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"{{DST_HOST}}"
 							],
-							"port": "5000",
 							"path": [
 								"record"
 							],
@@ -450,15 +414,11 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://127.0.0.1:5000/record?userID={{userID}}&categoryID={{categoryID}}",
-							"protocol": "http",
+							"raw": "{{PROTOCOL}}://{{DST_HOST}}/record?userID={{userID}}&categoryID={{categoryID}}",
+							"protocol": "{{PROTOCOL}}",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"{{DST_HOST}}"
 							],
-							"port": "5000",
 							"path": [
 								"record"
 							],
@@ -482,15 +442,11 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://127.0.0.1:5000/record?recordID={{recordID}}",
-							"protocol": "http",
+							"raw": "{{PROTOCOL}}://{{DST_HOST}}/record?recordID={{recordID}}",
+							"protocol": "{{PROTOCOL}}",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"{{DST_HOST}}"
 							],
-							"port": "5000",
 							"path": [
 								"record"
 							],
@@ -505,6 +461,38 @@
 					"response": []
 				}
 			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "DST_HOST",
+			"value": "127.0.0.1:5000",
+			"type": "string"
+		},
+		{
+			"key": "PROTOCOL",
+			"value": "http",
+			"type": "string"
 		}
 	]
 }
