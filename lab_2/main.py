@@ -1,4 +1,6 @@
-from flask import Flask, request, jsonify
+import uuid
+
+from flask import Flask, request, json
 
 from models.category import Category
 from models.record import Record
@@ -13,63 +15,70 @@ records = {}
 
 @app.post('/user')
 def create_user():
-    user = User("sayner")
+    user_data = request.get_json()
+    user = User(**user_data)
     users[user.ID] = user
-    return "You created the user :" + str(user)
+    return user.__dict__
 
 
-@app.get('/user/<userID>')
-def get_user(userID):
+@app.get('/user')
+def get_user():
     try:
-        return str(users[userID])
+        userID = request.args.get('userID')
+        return users[userID].__dict__
     except KeyError:
-       return "This user isn't exist."
+       return 0
 
 
-@app.delete('/user/<userID>')
-def delete_user(userID):
+@app.delete('/user')
+def delete_user():
     try:
-        result = "You delete the user :" + str(users[userID])
+        userID = request.args.get('userID')
+        result = users[userID]
         del users[userID]
-        return result
+        return result.__dict__
     except KeyError:
-       return "This user isn't exist."
+       return 0
 
 
 @app.get('/users')
 def get_users():
-    return str(users.keys())
+    return [user.__dict__
+             for user in users.values()]
 
 
 @app.post('/category')
 def create_category():
-    category = Category("category_name")
+    category_name = request.get_json()
+    category = Category(**category_name)
     categorys[category.ID] = category
-    print("+ " + category.ID)
-    return "You created the category :" + str(category)
+    return category.__dict__
 
 
-@app.get('/category/<categoryID>')
-def get_category(categoryID):
+@app.get('/category')
+def get_category():
     try:
-        return str(categorys[categoryID])
+        categoryID = request.args.get('categoryID')
+        return categorys[categoryID].__dict__
     except KeyError:
-       return "This category isn't exist."
+       return 0
 
 
 @app.get('/categorys')
 def get_categorys():
-    return str(categorys.keys())
+    return [category.__dict__
+             for category in categorys.values()]
 
 
-@app.delete('/category/<categoryID>')
-def delete_category(categoryID):
+@app.delete('/category')
+def delete_category():
     try:
-        result = "You delete the user :" + str(categorys[categoryID])
+        categoryID = request.args.get('categoryID')
+        result = categorys[categoryID]
         del categorys[categoryID]
-        return result
+        return result.__dict__
     except KeyError:
-       return "This category isn't exist."
+       return 0
 
 
 @app.post('/record')
@@ -78,7 +87,7 @@ def create_record():
     categoryID = request.args.get('categoryID')
     record = Record(userID, categoryID)
     records[record.ID] = record
-    return str(record)
+    return record.__dict__
 
 
 @app.get('/record')
@@ -88,21 +97,22 @@ def get_record():
     try:
         for record in records.values():
             if record.userID == userID and record.categoryID == categoryID:
-                return str(record)
+                return record.__dict__
             else:
-                return "Record with this parametrs isn't exist."
+                return 0
     except KeyError:
-       return "This category isn't exist."
+        return 0
 
 
-@app.delete('/record/<recordID>')
-def delete_record(recordID):
-        try:
-            result = "You delete the record :" + str(records[recordID])
-            del records[recordID]
-            return result
-        except KeyError:
-            return "This category isn't exist."
+@app.delete('/record')
+def delete_record():
+    recordID = request.args.get('recordID')
+    try:
+        result = records[recordID]
+        del records[recordID]
+        return result.__dict__
+    except KeyError:
+        return 0
 
 
 if __name__ == "__main__":

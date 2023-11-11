@@ -11,8 +11,3 @@ class Record:
         self.categoryID = categoryID
         self.time = datetime.now()
         self.amountOfExpenditure = str(random.randint(1, 100)) + "$"
-
-    def __str__(self):
-        return "{ recordID :" + self.ID + "; userID :" + str(self.userID) + "; categoryID :" + str(self.categoryID) + \
-            "; creation time :" + str(self.time) + "; amount of expenditure :" + str(self.amountOfExpenditure) + "; }"
-
