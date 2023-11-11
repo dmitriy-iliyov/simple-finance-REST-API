@@ -14,8 +14,97 @@
 					"request": {
 						"method": "POST",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"sayner\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
 							"raw": "http://127.0.0.1:5000/user",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"user"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "create-user",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"sayner\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:5000/user",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "5000",
+									"path": [
+										"user"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Werkzeug/3.0.1 Python/3.8.9"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 11 Nov 2023 05:21:10 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "67"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"ID\": \"a35708f6234a4d4787fb93af9ab85950\",\n    \"name\": \"sayner\"\n}"
+						}
+					]
+				},
+				{
+					"name": "get-user",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/user?userID={{userID}}",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -29,39 +118,8 @@
 							],
 							"query": [
 								{
-									"key": null,
-									"value": "rogporgkp",
-									"disabled": true
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "get-user",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://127.0.0.1:5000/user/3d752acf531743428204eba166c72eff",
-							"protocol": "http",
-							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
-							],
-							"port": "5000",
-							"path": [
-								"user",
-								"3d752acf531743428204eba166c72eff"
-							],
-							"query": [
-								{
-									"key": "",
-									"value": "",
-									"disabled": true
+									"key": "userID",
+									"value": "{{userID}}"
 								}
 							]
 						}
@@ -96,7 +154,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://127.0.0.1:5000/user/3d752acf531743428204eba166c72eff",
+							"raw": "http://127.0.0.1:5000/user?userID={{userID}}",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -106,8 +164,13 @@
 							],
 							"port": "5000",
 							"path": [
-								"user",
-								"3d752acf531743428204eba166c72eff"
+								"user"
+							],
+							"query": [
+								{
+									"key": "userID",
+									"value": "{{userID}}"
+								}
 							]
 						}
 					},
@@ -123,6 +186,15 @@
 					"request": {
 						"method": "POST",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"sayner category\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
 							"raw": "http://127.0.0.1:5000/category",
 							"protocol": "http",
@@ -138,7 +210,65 @@
 							]
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"name": "create-category",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"sayner category\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:5000/category",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "5000",
+									"path": [
+										"category"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Werkzeug/3.0.1 Python/3.8.9"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 11 Nov 2023 06:06:09 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "76"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"ID\": \"6d6dcac2c53a4efe999e6b4db58acfdb\",\n    \"name\": \"sayner category\"\n}"
+						}
+					]
 				},
 				{
 					"name": "get-category",
@@ -146,7 +276,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://127.0.0.1:5000/category/20231109180638397448",
+							"raw": "http://127.0.0.1:5000/category?categoryID={{categoryID}}",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -156,8 +286,13 @@
 							],
 							"port": "5000",
 							"path": [
-								"category",
-								"20231109180638397448"
+								"category"
+							],
+							"query": [
+								{
+									"key": "categoryID",
+									"value": "{{categoryID}}"
+								}
 							]
 						}
 					},
@@ -191,7 +326,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://127.0.0.1:5000/category/54b9e94d585949e7b01cbf4ae4728f42",
+							"raw": "http://127.0.0.1:5000/category?categoryID={{categoryID}}",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -201,8 +336,13 @@
 							],
 							"port": "5000",
 							"path": [
-								"category",
-								"54b9e94d585949e7b01cbf4ae4728f42"
+								"category"
+							],
+							"query": [
+								{
+									"key": "categoryID",
+									"value": "{{categoryID}}"
+								}
 							]
 						}
 					},
@@ -219,7 +359,7 @@
 						"method": "POST",
 						"header": [],
 						"url": {
-							"raw": "http://127.0.0.1:5000/record?userID=8a948bcaf150469492992d432a65fad&categoryID=ef49a18a6eb74cb4a8b2b1f280c715d7",
+							"raw": "http://127.0.0.1:5000/record?userID={{userID}}&categoryID={{categoryID}}",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -234,16 +374,75 @@
 							"query": [
 								{
 									"key": "userID",
-									"value": "8a948bcaf150469492992d432a65fad"
+									"value": "{{userID}}"
 								},
 								{
 									"key": "categoryID",
-									"value": "ef49a18a6eb74cb4a8b2b1f280c715d7"
+									"value": "{{categoryID}}"
 								}
 							]
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"name": "create-record",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "http://127.0.0.1:5000/record?userID={{userID}}&categoryID={{categoryID}}",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "5000",
+									"path": [
+										"record"
+									],
+									"query": [
+										{
+											"key": "userID",
+											"value": "{{userID}}"
+										},
+										{
+											"key": "categoryID",
+											"value": "{{categoryID}}"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Werkzeug/3.0.1 Python/3.8.9"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 11 Nov 2023 06:33:00 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "182"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"ID\": \"ac8bc760b6424d7bbb84df7d188156bb\",\n    \"amountOfExpenditure\": \"73$\",\n    \"categoryID\": \"{{categoryID}}\",\n    \"time\": \"Sat, 11 Nov 2023 08:33:00 GMT\",\n    \"userID\": \"{{userID}}\"\n}"
+						}
+					]
 				},
 				{
 					"name": "get-record",
@@ -251,7 +450,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://127.0.0.1:5000/record?userID=8a948bcaf150469492992d432a65fad&categoryID=ef49a18a6eb74cb4a8b2b1f280c715d7",
+							"raw": "http://127.0.0.1:5000/record?userID={{userID}}&categoryID={{categoryID}}",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -266,11 +465,11 @@
 							"query": [
 								{
 									"key": "userID",
-									"value": "8a948bcaf150469492992d432a65fad"
+									"value": "{{userID}}"
 								},
 								{
 									"key": "categoryID",
-									"value": "ef49a18a6eb74cb4a8b2b1f280c715d7"
+									"value": "{{categoryID}}"
 								}
 							]
 						}
@@ -283,7 +482,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://127.0.0.1:5000/record/3c8ba7dd60a94fd3b4f32b2e7af38bde",
+							"raw": "http://127.0.0.1:5000/record?recordID={{recordID}}",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -293,8 +492,13 @@
 							],
 							"port": "5000",
 							"path": [
-								"record",
-								"3c8ba7dd60a94fd3b4f32b2e7af38bde"
+								"record"
+							],
+							"query": [
+								{
+									"key": "recordID",
+									"value": "{{recordID}}"
+								}
 							]
 						}
 					},
