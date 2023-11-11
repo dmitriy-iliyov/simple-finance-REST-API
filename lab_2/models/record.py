@@ -1,15 +1,18 @@
+import random
+import uuid
 from datetime import datetime
-import re
 
 
 class Record:
 
     def __init__(self, userID, categoryID):
-        self.ID = re.sub(r'\D', '', str(datetime.now()))
+        self.ID = uuid.uuid4().hex
         self.userID = userID
         self.categoryID = categoryID
         self.time = datetime.now()
-        self.amountOfExpenditure = 0
+        self.amountOfExpenditure = str(random.randint(1, 100)) + "$"
 
     def __str__(self):
-        return "{ record : " + self.ID + "; userID : " + self.userID + "; categoryID : " + self.categoryID + "; time : " + self.time +"; amount : " + self.amountOfExpenditure + "; }"
+        return "{ recordID :" + self.ID + "; userID :" + str(self.userID) + "; categoryID :" + str(self.categoryID) + \
+            "; creation time :" + str(self.time) + "; amount of expenditure :" + str(self.amountOfExpenditure) + "; }"
+

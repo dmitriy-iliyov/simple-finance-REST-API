@@ -1,11 +1,10 @@
-from datetime import datetime
-import re
+import uuid
 
 
 class User:
 
     def __init__(self, name):
-        self.ID = re.sub(r'\D', '', str(datetime.now()))
+        self.ID = uuid.uuid4().hex
         self.name = name
 
     def __str__(self):

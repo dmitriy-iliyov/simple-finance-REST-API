@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, request, jsonify
 
 from models.category import Category
 from models.record import Record
@@ -22,7 +22,7 @@ def create_user():
 def get_user(userID):
     try:
         return str(users[userID])
-    except:
+    except KeyError:
        return "This user isn't exist."
 
 
@@ -32,7 +32,7 @@ def delete_user(userID):
         result = "You delete the user :" + str(users[userID])
         del users[userID]
         return result
-    except:
+    except KeyError:
        return "This user isn't exist."
 
 
@@ -53,7 +53,7 @@ def create_category():
 def get_category(categoryID):
     try:
         return str(categorys[categoryID])
-    except:
+    except KeyError:
        return "This category isn't exist."
 
 
@@ -68,24 +68,41 @@ def delete_category(categoryID):
         result = "You delete the user :" + str(categorys[categoryID])
         del categorys[categoryID]
         return result
-    except:
+    except KeyError:
        return "This category isn't exist."
 
 
 @app.post('/record')
 def create_record():
+    userID = request.args.get('userID')
+    categoryID = request.args.get('categoryID')
     record = Record(userID, categoryID)
     records[record.ID] = record
+    return str(record)
 
-#
-# @app.delete('/record/<record_id>')
-# def endpoint():
-#     pass
-#
-#
-# @app.get('/record/<record_id>')
-# def endpoint():
-#     pass
+
+@app.get('/record')
+def get_record():
+    userID = request.args.get('userID')
+    categoryID = request.args.get('categoryID')
+    try:
+        for record in records.values():
+            if record.userID == userID and record.categoryID == categoryID:
+                return str(record)
+            else:
+                return "Record with this parametrs isn't exist."
+    except KeyError:
+       return "This category isn't exist."
+
+
+@app.delete('/record/<recordID>')
+def delete_record(recordID):
+        try:
+            result = "You delete the record :" + str(records[recordID])
+            del records[recordID]
+            return result
+        except KeyError:
+            return "This category isn't exist."
 
 
 if __name__ == "__main__":
