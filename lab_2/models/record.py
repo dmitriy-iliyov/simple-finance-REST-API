@@ -9,5 +9,5 @@ class Record:
         self.ID = uuid.uuid4().hex
         self.userID = userID
         self.categoryID = categoryID
-        self.time = datetime.now()
+        self.time = str(datetime.now())
         self.amountOfExpenditure = str(random.randint(1, 100)) + "$"

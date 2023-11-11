@@ -99,7 +99,7 @@ def get_record():
             if record.userID == userID and record.categoryID == categoryID:
                 return record.__dict__
             else:
-                return 0
+                return "error"
     except KeyError:
         return 0
 
