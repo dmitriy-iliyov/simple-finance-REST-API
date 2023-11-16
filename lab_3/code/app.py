@@ -14,7 +14,7 @@ records = {}
 @app.post('/user')
 def create_user():
     user_data = request.get_json()
-    user = models.User(**user_data)
+    user = models.UserModel(**user_data)
     return user.__dict__
 
 
@@ -47,7 +47,7 @@ def get_users():
 @app.post('/category')
 def create_category():
     category_name = request.get_json()
-    category = models.Category(**category_name)
+    category = models.CategoryModel(**category_name)
     categorys[category.ID] = category
     return category.__dict__
 
@@ -82,7 +82,7 @@ def delete_category():
 def create_record():
     userID = request.args.get('userID')
     categoryID = request.args.get('categoryID')
-    record = models.Record(userID, categoryID)
+    record = models.RecordModel(userID, categoryID)
     records[record.ID] = record
     return record.__dict__
 

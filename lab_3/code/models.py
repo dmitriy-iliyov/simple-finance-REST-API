@@ -1,24 +1,20 @@
+from datetime import datetime
 from app import db
 
 
-class User(db.Model):
+class UserModel(db.Model):
     __tablename__ = "users"
+
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(20), unique=True)
 
     def __init__(self, name):
-        # self.ID = uuid.uuid4().hex
         self.name = name
 
-    def get_user(self):
-        pass
 
-    def del_user(self):
-        pass
-
-
-class Category(db.Model):
+class CategoryModel(db.Model):
     __tablename__ = "categorys"
+
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(20), unique=True)
 
@@ -26,16 +22,17 @@ class Category(db.Model):
         self.name = name
 
 
-class Record(db.Model):
+class RecordModel(db.Model):
     __tablename__ = "records"
+
     id = db.Column(db.Integer, primary_key=True)
     userID = db.Column(db.String(20), unique=True)
     categoryID = db.Column(db.String(20), unique=True)
     time = db.Column(db.String(20), unique=True)
     amountOfExpenditure = db.Column(db.String(20), unique=True)
 
-    def __init__(self, userID, categoryID):
+    def __init__(self, userID, categoryID, amountOfExpenditure):
         self.userID = userID
         self.categoryID = categoryID
         self.time = str(datetime.now())
-        self.amountOfExpenditure = str(random.randint(1, 100)) + "$"
+        self.amountOfExpenditure = amountOfExpenditure
