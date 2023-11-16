@@ -1,21 +1,50 @@
-from flask import Flask, request, json
+import psycopg2
+from flask import Flask, request, json, jsonify
 from flask_sqlalchemy import SQLAlchemy
+from marshmallow import *
+from sqlalchemy import create_engine
 
+import marshmallows
 
 app = Flask(__name__)
 app.config.from_pyfile('database_config.py', silent=True)
 db = SQLAlchemy(app)
+# engine = create_engine(f'postgresql://{os.environ["POSTGRES_USER"]}:{os.environ["POSTGRES_PASSWORD"]}@localhost:5432/{os.environ["POSTGRES_DB"]}')
+
+
+def get_db_connection():
+    connection = psycopg2.connect(
+        host="localhost",
+        database="database",
+        user="admin",
+        password="root")
+    return connection
+
+
+def add_data(data):
+    db.session.add(data)
+    db.session.commit()
+
 
 users = {}
 categorys = {}
 records = {}
 
+cur = get_db_connection().cursor()
+cur.execute('DROP TABLE IF EXISTS users;')
+cur.execute('CREATE TABLE users (id serial PRIMARY KEY,'
+            'name varchar (20) NOT NULL);')
+
 
 @app.post('/user')
 def create_user():
     user_data = request.get_json()
-    user = models.UserModel(**user_data)
-    return user.__dict__
+    try:
+        result = marshmallows.UserSchema().load({"name": user_data["name"]})
+        return result
+    except ValidationError as err:
+        print(err.messages)
+        return err.messages
 
 
 @app.get('/user')
@@ -24,7 +53,7 @@ def get_user():
         userID = request.args.get('userID')
         return users[userID].__dict__
     except KeyError:
-       return 0
+        return 0
 
 
 @app.delete('/user')
@@ -35,13 +64,13 @@ def delete_user():
         del users[userID]
         return result.__dict__
     except KeyError:
-       return 0
+        return 0
 
 
 @app.get('/users')
 def get_users():
     return [user.__dict__
-             for user in users.values()]
+            for user in users.values()]
 
 
 @app.post('/category')
@@ -58,13 +87,13 @@ def get_category():
         categoryID = request.args.get('categoryID')
         return categorys[categoryID].__dict__
     except KeyError:
-       return 0
+        return 0
 
 
 @app.get('/categorys')
 def get_categorys():
     return [category.__dict__
-             for category in categorys.values()]
+            for category in categorys.values()]
 
 
 @app.delete('/category')
@@ -75,7 +104,7 @@ def delete_category():
         del categorys[categoryID]
         return result.__dict__
     except KeyError:
-       return 0
+        return 0
 
 
 @app.post('/record')
@@ -114,9 +143,5 @@ def delete_record():
 
 if __name__ == "__main__":
     import models
+
     app.run(debug=True)
-
-
-
-
-

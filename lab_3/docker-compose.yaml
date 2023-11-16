@@ -1,7 +1,7 @@
 version: '3'
 
 services:
-  lab2:
+  lab_2_2:
     restart: always
     build:
       context: .
