@@ -2,18 +2,18 @@ from marshmallow import Schema, fields
 
 
 class UserSchema(Schema):
-    id = fields.Str(dump_only=True)
+    id = fields.Integer(dump_only=True)
     name = fields.String(required=True)
 
 
 class CategorySchema(Schema):
-    id = fields.Str(dump_only=True)
+    id = fields.Integer(dump_only=True)
     name = fields.Str(required=True)
 
 
-class RecodSchema(Schema):
-    id = fields.Str(dump_only=True)
-    userID = fields.Str(required=True)
-    categoryID = fields.Str(required=True)
+class RecordSchema(Schema):
+    id = fields.Integer(dump_only=True)
+    user_id = fields.Integer(required=True)
+    category_id = fields.Integer(required=True)
     time = fields.Str(dump_only=True)
-    amountOfExpenditure = fields.Str(required=True)
+    amount_of_expenditure = fields.Float(required=True)

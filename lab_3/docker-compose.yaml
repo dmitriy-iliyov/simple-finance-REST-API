@@ -1,17 +1,21 @@
 version: '3'
 
 services:
-  lab_2_2:
-    restart: always
-    build:
-      context: .
-      dockerfile: Dockerfile
-    environment:
-      PORT: "5000"
-    ports:
-    - "5000:5000"
+#  lab_2_2:
+#    networks:
+#      - default
+#    restart: always
+#    build:
+#      context: .
+#      dockerfile: Dockerfile
+#    environment:
+#      PORT: "5000"
+#    ports:
+#    - "5000:5000"
   db:
     image: postgres:15.4-alpine3.18
+    networks:
+      - default
     environment:
       POSTGRES_PASSWORD: root
       POSTGRES_USER: admin
