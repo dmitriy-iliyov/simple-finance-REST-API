@@ -1,8 +1,8 @@
 import psycopg2
-from collections import OrderedDict
-from flask import Flask, request, jsonify, json
+from flask import Flask, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from marshmallow import *
+
 import marshmallows
 
 
@@ -17,6 +17,14 @@ def create_tables():
         CREATE TABLE users (
                 id SERIAL PRIMARY KEY,
                 name VARCHAR (20) NOT NULL);
+        """,
+        """ 
+        CREATE TABLE accounts (
+                id SERIAL PRIMARY KEY,
+                user_id INT,
+                money INT NOT NULL,
+                FOREIGN KEY (user_id) REFERENCES users (id)
+                );
         """,
         """ 
         CREATE TABLE categories ( 
@@ -55,6 +63,10 @@ def add_data(data):
     db.session.commit()
 
 
+def upd_data():
+    db.session.commit()
+
+
 def delete_data(data):
     db.session.delete(data)
     db.session.commit()
@@ -69,16 +81,32 @@ create_tables()
 
 @app.post('/user')
 def create_user():
-    from models import UserModel
+    from models import UserModel, BankAccountModel
     user_data = request.get_json()
     try:
         marshmallows.UserSchema().load({"name": user_data["name"]})
-        user = UserModel(user_data["name"])
-        add_data(user)
-        return jsonify({"id": user.id, "name": user.name})
+        if db.session.query(UserModel).filter(UserModel.name == user_data["name"]).first() is None:
+            user = UserModel(user_data["name"])
+            add_data(user)
+            marshmallows.BankAccountSchema().load({"user_id": user.id, "money": user_data["money"]})
+            account = BankAccountModel(user.id, user_data["money"])
+            add_data(account)
+            return jsonify({"id": user.id, "name": user.name, "money": account.money})
+        else:
+            return "UserExist, 404"
     except ValidationError as error:
-        print(error.messages)
         return error.messages
+
+
+@app.get('/user/account')
+def get_account():
+    from models import BankAccountModel
+    user_id = request.args.get('userID')
+    try:
+        account = db.session.query(BankAccountModel).filter(BankAccountModel.user_id == user_id).first()
+        return jsonify({"user_id": account.user_id, "money": account.money})
+    except AttributeError:
+        return "AttributeError, 404"
 
 
 @app.get('/user')
@@ -89,7 +117,7 @@ def get_user():
         user = db.session.query(UserModel).filter(UserModel.id == user_id).first()
         return jsonify({"id": user.id, "name": user.name})
     except AttributeError:
-        return 0
+        return "AttributeError, 404"
 
 
 @app.delete('/user')
@@ -102,7 +130,7 @@ def delete_user():
         delete_data(user)
         return jsonify(deleted_user)
     except AttributeError:
-        return 0
+        return "AttributeError, 404"
 
 
 @app.get('/users')
@@ -118,11 +146,13 @@ def create_category():
     category_data = request.get_json()
     try:
         marshmallows.CategorySchema().load({"name": category_data["name"]})
-        category = CategoryModel(category_data["name"])
-        add_data(category)
-        return jsonify({"id": category.id, "name": category.name})
+        if db.session.query(CategoryModel).filter(CategoryModel.name == category_data["name"]).first() is None:
+            category = CategoryModel(category_data["name"])
+            add_data(category)
+            return jsonify({"id": category.id, "name": category.name})
+        else:
+            return "CategoryExist, 404"
     except ValidationError as error:
-        print(error.messages)
         return error.messages
 
 
@@ -136,9 +166,8 @@ def get_category():
             category = db.session.query(CategoryModel).filter(CategoryModel.id == category_id).first()
             return jsonify({"id": category.id, "name": category.name})
         except AttributeError:
-            return 0
+            return "AttributeError, 404"
     except ValidationError as error:
-        print(error.messages)
         return error.messages
 
 
@@ -159,23 +188,31 @@ def delete_category():
         delete_data(category)
         return jsonify(deleted_category)
     except AttributeError:
-        return 0
+        return "AttributeError, 404"
 
 
 @app.post('/record')
 def create_record():
-    from models import RecordModel
+    import models
     user_id = request.args.get('userID')
     category_id = request.args.get('categoryID')
     amountOfExpenditure = request.args.get('amount')
     try:
         marshmallows.RecordSchema().load({"user_id": user_id, "category_id": category_id, "amount_of_expenditure": amountOfExpenditure})
-        record = RecordModel(user_id, category_id, amountOfExpenditure)
-        add_data(record)
-        return jsonify({"id": record.id, "user_id": record.user_id, "category_id": record.category_id,
-                        "time": record.time, "amount_of_expenditure": record.amount_of_expenditure})
+        if db.session.get(models.UserModel, user_id) is not None and db.session.get(models.CategoryModel, category_id) is not None:
+            account = db.session.query(models.BankAccountModel).filter(models.BankAccountModel.user_id == user_id).first()
+            if account is not None and account.money - float(amountOfExpenditure) > 0:
+                account.money = account.money - float(amountOfExpenditure)
+                upd_data()
+                record = models.RecordModel(user_id, category_id, amountOfExpenditure)
+                add_data(record)
+                return jsonify({"id": record.id, "user_id": record.user_id, "category_id": record.category_id,
+                                "time": record.time, "amount_of_expenditure": record.amount_of_expenditure})
+            else:
+                return "user account isn't exist or insufficient funds"
+        else:
+            return "user or category isn't exist"
     except ValidationError as error:
-        print(error.messages)
         return error.messages
 
 
@@ -192,9 +229,8 @@ def get_record():
             return jsonify({"id": record.id, "user_id": record.user_id, "category_id": record.category_id,
                             "time": record.time, "amount_of_expenditure": record.amount_of_expenditure})
         except AttributeError:
-            return 0
+            return "AttributeError, 404"
     except ValidationError as error:
-        print(error.messages)
         return error.messages
 
 
@@ -202,8 +238,7 @@ def get_record():
 def delete_record():
     from models import RecordModel
     record_id = request.args.get('recordID')
-    print(record_id)
-    if isinstance(record_id, int):
+    if record_id.isdigit():
         try:
             record = db.session.query(RecordModel).filter(RecordModel.id == record_id).first()
             deleted_record = {"id": record.id, "user_id": record.user_id, "category_id": record.category_id,
@@ -211,7 +246,7 @@ def delete_record():
             delete_data(record)
             return jsonify(deleted_record)
         except AttributeError:
-            return 0
+            return "AttributeError, 404"
     else:
         return "sqlalchemy.exc.DataError"
 
