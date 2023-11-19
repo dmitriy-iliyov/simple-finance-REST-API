@@ -6,6 +6,12 @@ class UserSchema(Schema):
     name = fields.String(required=True)
 
 
+class BankAccountSchema(Schema):
+    id = fields.Integer(dump_only=True)
+    user_id = fields.Integer(required=True)
+    money = fields.Float(required=True)
+
+
 class CategorySchema(Schema):
     id = fields.Integer(dump_only=True)
     name = fields.Str(required=True)
