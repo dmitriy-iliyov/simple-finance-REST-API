@@ -1,14 +1,14 @@
+from datetime import datetime
 import psycopg2
 from flask import Flask, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from marshmallow import *
-
 import marshmallows
 
 
 def get_db_connection():
-    # return psycopg2.connect(host="lab_3-db-1", database="database", user="admin", password="root")
-    return psycopg2.connect(host="localhost", database="database", user="admin", password="root")
+    return psycopg2.connect(host="lab_3-db-1", database="database", user="admin", password="root")
+    # return psycopg2.connect(host="localhost", database="database", user="admin", password="root")
 
 
 def create_tables():
@@ -77,6 +77,11 @@ app.config.from_pyfile('config.py', silent=True)
 app.json.sort_keys = False
 db = SQLAlchemy(app)
 create_tables()
+
+
+@app.route('/')
+def healthcheck():
+    return str(datetime.now()).split('.')[0] + " Service is live"
 
 
 @app.post('/user')

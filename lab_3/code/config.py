@@ -4,8 +4,8 @@ PROPAGATE_EXCEPTIONS = True
 
 FLASK_DEBUG = True
 
-# SQLALCHEMY_DATABASE_URI = f'postgresql://admin:root@lab_3-db-1:5432/database'
-SQLALCHEMY_DATABASE_URI = f'postgresql://admin:root@localhost:5432/database'
+SQLALCHEMY_DATABASE_URI = f'postgresql://admin:root@lab_3-db-1:5432/database'
+# SQLALCHEMY_DATABASE_URI = f'postgresql://admin:root@localhost:5432/database'
 
 # SQLALCHEMY_DATABASE_URI = f'postgresql://{os.environ["POSTGRES_USER"]}:{os.environ["POSTGRES_PASSWORD"]}@localhost:5432/{os.environ["POSTGRES_DB"]}'
 SQLALCHEMY_TRACK_MODIFICATIONS = False
