@@ -2,7 +2,7 @@
 	"info": {
 		"_postman_id": "4a86669a-5675-4d5f-a8b8-6f7b39365310",
 		"name": "lab_2",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
 		"_exporter_id": "31061267"
 	},
 	"item": [
@@ -16,23 +16,14 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"name\": \"sayner\"\n}",
+							"raw": "{\n    \"name\": \"santy6u4jer1\",\n    \"money\": 213124\n}",
 							"options": {
 								"raw": {
 									"language": "json"
 								}
 							}
 						},
-						"url": {
-							"raw": "{{PROTOCOL}}://{{DST_HOST}}/user",
-							"protocol": "{{PROTOCOL}}",
-							"host": [
-								"{{DST_HOST}}"
-							],
-							"path": [
-								"user"
-							]
-						}
+						"url": "{{PROTOCOL}}://{{DST_HOST}}/user"
 					},
 					"response": [
 						{
@@ -42,27 +33,14 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"name\": \"sayner\"\n}",
+									"raw": "{\n    \"name\": \"sa2yner2345421\",\n    \"money\": 213124\n}",
 									"options": {
 										"raw": {
 											"language": "json"
 										}
 									}
 								},
-								"url": {
-									"raw": "http://127.0.0.1:5000/user",
-									"protocol": "http",
-									"host": [
-										"127",
-										"0",
-										"0",
-										"1"
-									],
-									"port": "5000",
-									"path": [
-										"user"
-									]
-								}
+								"url": "{{PROTOCOL}}://{{DST_HOST}}/user"
 							},
 							"status": "OK",
 							"code": 200,
@@ -70,11 +48,11 @@
 							"header": [
 								{
 									"key": "Server",
-									"value": "Werkzeug/3.0.1 Python/3.8.9"
+									"value": "Werkzeug/3.0.1 Python/3.11.3"
 								},
 								{
 									"key": "Date",
-									"value": "Sat, 11 Nov 2023 05:21:10 GMT"
+									"value": "Sun, 19 Nov 2023 04:58:42 GMT"
 								},
 								{
 									"key": "Content-Type",
@@ -82,7 +60,7 @@
 								},
 								{
 									"key": "Content-Length",
-									"value": "67"
+									"value": "47"
 								},
 								{
 									"key": "Connection",
@@ -90,15 +68,22 @@
 								}
 							],
 							"cookie": [],
-							"body": "{\n    \"ID\": \"a35708f6234a4d4787fb93af9ab85950\",\n    \"name\": \"sayner\"\n}"
+							"body": "{\n    \"id\": 6,\n    \"name\": \"sayner23421\",\n    \"money\": 213124\n}"
 						}
 					]
 				},
 				{
 					"name": "get-user",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
 					"request": {
 						"method": "GET",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"url": {
 							"raw": "{{PROTOCOL}}://{{DST_HOST}}/user?userID={{userID}}",
 							"protocol": "{{PROTOCOL}}",
@@ -109,6 +94,11 @@
 								"user"
 							],
 							"query": [
+								{
+									"key": "userID",
+									"value": "1",
+									"disabled": true
+								},
 								{
 									"key": "userID",
 									"value": "{{userID}}"
@@ -123,16 +113,7 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"url": {
-							"raw": "{{PROTOCOL}}://{{DST_HOST}}/users",
-							"protocol": "{{PROTOCOL}}",
-							"host": [
-								"{{DST_HOST}}"
-							],
-							"path": [
-								"users"
-							]
-						}
+						"url": "{{PROTOCOL}}://{{DST_HOST}}/users"
 					},
 					"response": []
 				},
@@ -154,6 +135,46 @@
 								{
 									"key": "userID",
 									"value": "{{userID}}"
+								},
+								{
+									"key": "userID",
+									"value": "2",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get-account",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{PROTOCOL}}://{{DST_HOST}}/user/account?userID={{userID}}",
+							"protocol": "{{PROTOCOL}}",
+							"host": [
+								"{{DST_HOST}}"
+							],
+							"path": [
+								"user",
+								"account"
+							],
+							"query": [
+								{
+									"key": "userID",
+									"value": "{{userID}}"
+								},
+								{
+									"key": "userID",
+									"value": "123",
+									"disabled": true
+								},
+								{
+									"key": "userID",
+									"value": "2",
+									"disabled": true
 								}
 							]
 						}
@@ -172,23 +193,14 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"name\": \"sayner category\"\n}",
+							"raw": "{\n    \"name\": \"ar43rtwghg category1\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
 								}
 							}
 						},
-						"url": {
-							"raw": "{{PROTOCOL}}://{{DST_HOST}}/category",
-							"protocol": "{{PROTOCOL}}",
-							"host": [
-								"{{DST_HOST}}"
-							],
-							"path": [
-								"category"
-							]
-						}
+						"url": "{{PROTOCOL}}://{{DST_HOST}}/category"
 					},
 					"response": [
 						{
@@ -198,27 +210,14 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"name\": \"sayner category\"\n}",
+									"raw": "{\n    \"name\": \"sa43y12345 category\"\n}",
 									"options": {
 										"raw": {
 											"language": "json"
 										}
 									}
 								},
-								"url": {
-									"raw": "http://127.0.0.1:5000/category",
-									"protocol": "http",
-									"host": [
-										"127",
-										"0",
-										"0",
-										"1"
-									],
-									"port": "5000",
-									"path": [
-										"category"
-									]
-								}
+								"url": "{{PROTOCOL}}://{{DST_HOST}}/category"
 							},
 							"status": "OK",
 							"code": 200,
@@ -226,11 +225,11 @@
 							"header": [
 								{
 									"key": "Server",
-									"value": "Werkzeug/3.0.1 Python/3.8.9"
+									"value": "Werkzeug/3.0.1 Python/3.11.3"
 								},
 								{
 									"key": "Date",
-									"value": "Sat, 11 Nov 2023 06:06:09 GMT"
+									"value": "Sun, 19 Nov 2023 05:02:17 GMT"
 								},
 								{
 									"key": "Content-Type",
@@ -238,7 +237,7 @@
 								},
 								{
 									"key": "Content-Length",
-									"value": "76"
+									"value": "31"
 								},
 								{
 									"key": "Connection",
@@ -246,7 +245,7 @@
 								}
 							],
 							"cookie": [],
-							"body": "{\n    \"ID\": \"6d6dcac2c53a4efe999e6b4db58acfdb\",\n    \"name\": \"sayner category\"\n}"
+							"body": "{\n    \"id\": 3,\n    \"name\": \"say category\"\n}"
 						}
 					]
 				},
@@ -268,6 +267,11 @@
 								{
 									"key": "categoryID",
 									"value": "{{categoryID}}"
+								},
+								{
+									"key": "categoryID",
+									"value": "4",
+									"disabled": true
 								}
 							]
 						}
@@ -275,20 +279,11 @@
 					"response": []
 				},
 				{
-					"name": "get-categorys",
+					"name": "get-categories",
 					"request": {
 						"method": "GET",
 						"header": [],
-						"url": {
-							"raw": "{{PROTOCOL}}://{{DST_HOST}}/categorys",
-							"protocol": "{{PROTOCOL}}",
-							"host": [
-								"{{DST_HOST}}"
-							],
-							"path": [
-								"categorys"
-							]
-						}
+						"url": "{{PROTOCOL}}://{{DST_HOST}}/categories"
 					},
 					"response": []
 				},
@@ -310,6 +305,11 @@
 								{
 									"key": "categoryID",
 									"value": "{{categoryID}}"
+								},
+								{
+									"key": "categoryID",
+									"value": "1",
+									"disabled": true
 								}
 							]
 						}
@@ -327,7 +327,7 @@
 						"method": "POST",
 						"header": [],
 						"url": {
-							"raw": "{{PROTOCOL}}://{{DST_HOST}}/record?userID={{userID}}&categoryID={{categoryID}}",
+							"raw": "{{PROTOCOL}}://{{DST_HOST}}/record?userID={{userID}}&categoryID={{categoryID}}&amount={{amount}}",
 							"protocol": "{{PROTOCOL}}",
 							"host": [
 								"{{DST_HOST}}"
@@ -343,6 +343,25 @@
 								{
 									"key": "categoryID",
 									"value": "{{categoryID}}"
+								},
+								{
+									"key": "amount",
+									"value": "{{amount}}"
+								},
+								{
+									"key": "userID",
+									"value": "7",
+									"disabled": true
+								},
+								{
+									"key": "categoryID",
+									"value": "4",
+									"disabled": true
+								},
+								{
+									"key": "amount",
+									"value": "163074",
+									"disabled": true
 								}
 							]
 						}
@@ -354,26 +373,41 @@
 								"method": "POST",
 								"header": [],
 								"url": {
-									"raw": "http://127.0.0.1:5000/record?userID={{userID}}&categoryID={{categoryID}}",
-									"protocol": "http",
+									"raw": "{{PROTOCOL}}://{{DST_HOST}}/record?userID=7&categoryID=4&amount=163074",
+									"protocol": "{{PROTOCOL}}",
 									"host": [
-										"127",
-										"0",
-										"0",
-										"1"
+										"{{DST_HOST}}"
 									],
-									"port": "5000",
 									"path": [
 										"record"
 									],
 									"query": [
 										{
 											"key": "userID",
-											"value": "{{userID}}"
+											"value": "{{userID}}",
+											"disabled": true
 										},
 										{
 											"key": "categoryID",
-											"value": "{{categoryID}}"
+											"value": "{{categoryID}}",
+											"disabled": true
+										},
+										{
+											"key": "amount",
+											"value": "{{amount}}",
+											"disabled": true
+										},
+										{
+											"key": "userID",
+											"value": "7"
+										},
+										{
+											"key": "categoryID",
+											"value": "4"
+										},
+										{
+											"key": "amount",
+											"value": "163074"
 										}
 									]
 								}
@@ -384,11 +418,11 @@
 							"header": [
 								{
 									"key": "Server",
-									"value": "Werkzeug/3.0.1 Python/3.8.9"
+									"value": "Werkzeug/3.0.1 Python/3.11.3"
 								},
 								{
 									"key": "Date",
-									"value": "Sat, 11 Nov 2023 06:33:00 GMT"
+									"value": "Sun, 19 Nov 2023 05:44:38 GMT"
 								},
 								{
 									"key": "Content-Type",
@@ -396,7 +430,7 @@
 								},
 								{
 									"key": "Content-Length",
-									"value": "182"
+									"value": "109"
 								},
 								{
 									"key": "Connection",
@@ -404,7 +438,7 @@
 								}
 							],
 							"cookie": [],
-							"body": "{\n    \"ID\": \"ac8bc760b6424d7bbb84df7d188156bb\",\n    \"amountOfExpenditure\": \"73$\",\n    \"categoryID\": \"{{categoryID}}\",\n    \"time\": \"Sat, 11 Nov 2023 08:33:00 GMT\",\n    \"userID\": \"{{userID}}\"\n}"
+							"body": "{\n    \"id\": 4,\n    \"user_id\": 7,\n    \"category_id\": 4,\n    \"time\": \"Sun, 19 Nov 2023 05:44:38 GMT\",\n    \"amount_of_expenditure\": 163074\n}"
 						}
 					]
 				},
@@ -430,6 +464,16 @@
 								{
 									"key": "categoryID",
 									"value": "{{categoryID}}"
+								},
+								{
+									"key": "userID",
+									"value": "2",
+									"disabled": true
+								},
+								{
+									"key": "categoryID",
+									"value": "3",
+									"disabled": true
 								}
 							]
 						}
@@ -454,6 +498,11 @@
 								{
 									"key": "recordID",
 									"value": "{{recordID}}"
+								},
+								{
+									"key": "recordID",
+									"value": "12",
+									"disabled": true
 								}
 							]
 						}
