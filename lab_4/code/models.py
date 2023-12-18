@@ -1,57 +1,71 @@
+from datetime import timedelta
+from passlib.handlers.pbkdf2 import pbkdf2_sha256
 from sqlalchemy import func
-from app import db
+from app import database
+from flask_jwt_extended import *
 
 
-class UserModel(db.Model):
+class UserModel(database.Model):
     __tablename__ = "users"
 
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(20), unique=True, nullable=False)
+    id = database.Column(database.Integer, primary_key=True)
+    name = database.Column(database.String(20), unique=True, nullable=False)
+    password = database.Column(database.String(20), unique=True, nullable=False)
 
-    user_money = db.relationship("BankAccountModel", uselist=False, back_populates="user_account")
-    record = db.relationship("RecordModel", back_populates="user", lazy="dynamic")
+    user_money = database.relationship("BankAccountModel", uselist=False, back_populates="user_account")
+    record = database.relationship("RecordModel", back_populates="user", lazy="dynamic")
 
-    def __init__(self, name):
+    def __init__(self, name, password):
         self.name = name
+        self.password = pbkdf2_sha256.hash(password)
+
+    def get_token(self, expire_time=24):
+        expire_delta = timedelta(expire_time)
+        return create_access_token(identity=self.id, expires_delta=expire_delta)
+
+    def authenticate(self, password):
+        if not pbkdf2_sha256.verify(password, self.password):
+            return False
+        return True
 
 
-class BankAccountModel(db.Model):
+class BankAccountModel(database.Model):
     __tablename__ = "accounts"
 
-    id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey("users.id"), unique=True)
-    money = db.Column(db.Float(precision=2), unique=False, nullable=False)
+    id = database.Column(database.Integer, primary_key=True)
+    user_id = database.Column(database.Integer, database.ForeignKey("users.id"), unique=True)
+    money = database.Column(database.Float(precision=2), unique=False, nullable=False)
 
-    user_account = db.relationship("UserModel", back_populates="user_money")
+    user_account = database.relationship("UserModel", back_populates="user_money")
 
     def __init__(self, user_id, money):
         self.user_id = user_id
         self.money = money
 
 
-class CategoryModel(db.Model):
+class CategoryModel(database.Model):
     __tablename__ = "categories"
 
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(20), unique=True, nullable=False)
+    id = database.Column(database.Integer, primary_key=True)
+    name = database.Column(database.String(20), unique=True, nullable=False)
 
-    record = db.relationship("RecordModel", back_populates="category", lazy="dynamic")
+    record = database.relationship("RecordModel", back_populates="category", lazy="dynamic")
 
     def __init__(self, name):
         self.name = name
 
 
-class RecordModel(db.Model):
+class RecordModel(database.Model):
     __tablename__ = "records"
 
-    id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey("users.id"), unique=False, nullable=False)
-    category_id = db.Column(db.Integer, db.ForeignKey("categories.id"), unique=False, nullable=False)
-    time = db.Column(db.TIMESTAMP, server_default=func.now())
-    amount_of_expenditure = db.Column(db.Float(precision=2), unique=False, nullable=False)
+    id = database.Column(database.Integer, primary_key=True)
+    user_id = database.Column(database.Integer, database.ForeignKey("users.id"), unique=False, nullable=False)
+    category_id = database.Column(database.Integer, database.ForeignKey("categories.id"), unique=False, nullable=False)
+    time = database.Column(database.TIMESTAMP, server_default=func.now())
+    amount_of_expenditure = database.Column(database.Float(precision=2), unique=False, nullable=False)
 
-    user = db.relationship("UserModel", back_populates="record")
-    category = db.relationship("CategoryModel", back_populates="record")
+    user = database.relationship("UserModel", back_populates="record")
+    category = database.relationship("CategoryModel", back_populates="record")
 
     def __init__(self, user_id, category_id, amount_of_expenditure):
         self.user_id = user_id
